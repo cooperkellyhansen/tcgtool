@@ -1,0 +1,51 @@
+# Pokemon TCG Price Analysis Tool Configuration
+
+# API Keys (add your keys here)
+api_keys:
+  pokemon_tcg_api: ""  # Get free key from https://dev.pokemontcg.io/
+  tcgplayer_api: ""    # Optional: TCGPlayer API key
+
+# Database settings
+database:
+  path: "data/tcgtool.db"
+  backup_enabled: true
+  backup_interval_days: 7
+
+# Price tracking
+price_tracking:
+  enabled: true
+  check_interval_hours: 24
+  retention_days: 365  # Keep price history for 1 year
+
+# Alerts
+alerts:
+  enabled: true
+  check_interval_minutes: 60
+  notification_method: "console"  # console, email, or webhook
+
+# Export settings
+export:
+  default_format: "csv"
+  output_directory: "exports"
+  include_images: false
+  powerbi:
+    enabled: true
+    auto_refresh: true
+    refresh_interval_hours: 6
+
+# Market analysis
+analysis:
+  trending_days: 30
+  volatility_threshold: 0.15  # 15% price change
+  min_data_points: 7
+
+# Cache settings
+cache:
+  enabled: true
+  ttl_hours: 6
+  directory: "data/cache"
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "data/tcgtool.log"

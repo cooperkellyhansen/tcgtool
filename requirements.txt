@@ -1,0 +1,27 @@
+# Core dependencies
+requests>=2.31.0
+pyyaml>=6.0.1
+click>=8.1.7
+python-dotenv>=1.0.0
+
+# Database
+sqlalchemy>=2.0.23
+alembic>=1.12.1
+
+# Data processing
+pandas>=2.1.4
+numpy>=1.26.2
+
+# API integrations
+pokemontcgsdk>=3.7.0
+
+# Utilities
+python-dateutil>=2.8.2
+tabulate>=0.9.0
+colorama>=0.4.6
+
+# Notifications (for price alerts)
+schedule>=1.2.0
+
+# Excel export
+openpyxl>=3.1.2
