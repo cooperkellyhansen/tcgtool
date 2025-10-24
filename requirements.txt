@@ -13,7 +13,7 @@ pandas>=2.1.4
 numpy>=1.26.2
 
 # API integrations
-pokemontcgsdk>=3.7.0
+pokemontcgsdk>=3.4.0
 
 # Utilities
 python-dateutil>=2.8.2

@@ -14,9 +14,31 @@ A comprehensive Python-based tool for analyzing Pokemon Trading Card Game prices
 
 ## Installation
 
+### 1. Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
+
+### 2. Get a FREE Pokemon TCG API Key (REQUIRED)
+
+⚠️ **The tool requires a Pokemon TCG API key to function!**
+
+1. Visit **https://dev.pokemontcg.io/**
+2. Sign up for a free account (takes 30 seconds)
+3. Copy your API key
+
+### 3. Configure Your API Key
+
+```bash
+# Copy the example environment file
+cp .env.example .env
+
+# Edit .env and add your API key
+POKEMON_TCG_API_KEY=your_api_key_here
+```
+
+**Without an API key, you cannot fetch card data or prices!**
 
 ## Quick Start
 
@@ -69,11 +91,21 @@ tcgtool/
 
 ## Configuration
 
-Edit `config.yaml` to configure:
-- API keys for price data sources
+### Required Setup
+
+**Pokemon TCG API Key** (Required): Add your key to `.env`:
+```bash
+POKEMON_TCG_API_KEY=your_key_here
+```
+Get your free key at: https://dev.pokemontcg.io/
+
+### Optional Configuration
+
+Edit `config.yaml` to customize:
 - Alert notification settings
 - Export preferences
 - Database location
+- Price tracking intervals
 
 ## Data Sources
 

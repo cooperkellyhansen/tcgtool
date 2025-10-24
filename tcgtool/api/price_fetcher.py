@@ -50,7 +50,17 @@ class PriceFetcher:
             return price
 
         except Exception as e:
-            print(f"Error fetching price for {card_id}: {e}")
+            # Check if it's a 403 error (missing API key)
+            try:
+                error_msg = repr(e)
+            except:
+                error_msg = type(e).__name__
+
+            if '403' in error_msg or 'Forbidden' in error_msg:
+                print("\n⚠️  API Key Required!")
+                print("Get a free key at: https://dev.pokemontcg.io/")
+            else:
+                print(f"Error fetching price for {card_id}")
             return None
 
     def get_price_summary(self, card_id: str) -> Dict[str, Any]:

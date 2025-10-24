@@ -2,6 +2,7 @@
 
 import json
 from typing import List, Optional, Dict, Any
+from urllib.error import HTTPError
 from pokemontcgsdk import Card as SDKCard, Set
 from pokemontcgsdk import RestClient
 
@@ -48,7 +49,23 @@ class PokemonTCGAPI:
             return cards
 
         except Exception as e:
-            print(f"Error searching cards: {e}")
+            # Check if this is a 403 error (wrapped by SDK)
+            is_403 = False
+            if isinstance(e, HTTPError) and e.code == 403:
+                is_403 = True
+            elif hasattr(e, '__cause__') and isinstance(e.__cause__, HTTPError) and e.__cause__.code == 403:
+                is_403 = True
+            elif hasattr(e, '__context__') and isinstance(e.__context__, HTTPError) and e.__context__.code == 403:
+                is_403 = True
+
+            if is_403:
+                print("\n⚠️  API Key Required!")
+                print("The Pokemon TCG API requires an API key for requests.")
+                print("Get a free key at: https://dev.pokemontcg.io/")
+                print("Then add it to your .env file: POKEMON_TCG_API_KEY=your_key_here\n")
+            else:
+                print(f"Error searching cards. Checking local database...")
+
             # Fallback to local database search
             return self.db.search_cards(query, limit=page_size)
 
@@ -74,7 +91,19 @@ class PokemonTCGAPI:
                 return self.db.add_card(card_data)
 
         except Exception as e:
-            print(f"Error fetching card: {e}")
+            # Check if this is a 403 error (wrapped by SDK)
+            is_403 = False
+            if isinstance(e, HTTPError) and e.code == 403:
+                is_403 = True
+            elif hasattr(e, '__cause__') and isinstance(e.__cause__, HTTPError) and e.__cause__.code == 403:
+                is_403 = True
+            elif hasattr(e, '__context__') and isinstance(e.__context__, HTTPError) and e.__context__.code == 403:
+                is_403 = True
+
+            if is_403:
+                print("\n⚠️  API Key Required!")
+                print("Get a free key at: https://dev.pokemontcg.io/")
+                print("Add it to .env file: POKEMON_TCG_API_KEY=your_key_here\n")
 
         return None
 
